@@ -42,4 +42,10 @@ public class UsuarioController {
         return new ModelAndView("usuario/form","usuario",usuario);
     }
 
+    @GetMapping(value="/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Usuario usuario){
+        service.delete(usuario);
+        return new ModelAndView("redirect:/usuario");
+    }
+
 }

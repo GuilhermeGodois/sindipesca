@@ -11,7 +11,7 @@
             
             <p><a th:href="@{/usuario/novo}" class="btn btn-primary btn-lg">Novo</a></p>
             
-            <table class="table">
+            <table class="table" id="usuarios">
                 <thead class="thead-light">
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
@@ -23,7 +23,11 @@
                         <td th:text="${umusuario.nome}"></td>
                         <td th:text="${umusuario.sexo}"></td>
                         <td th:text="${umusuario.dataNascimento}"></td>
-                        <td><a th:href="@{'/usuario/alterar/' + ${umusuario.id}}" class="btn btn-primary">Alterar</a></td>
+                        <td>
+                            <a th:href="@{'/usuario/alterar/' + ${umusuario.id}}" class="btn btn-primary">Alterar</a>
+                            <button class='btn btn-danger js-delete'
+                                th:data-id="${umusuario.id}"><span class="oi oi-bug"></span>Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -34,10 +38,20 @@
        <script type="text/javascript">
         $(document).ready(function(){
 
-           /* bootbox.confirm("EU NAO ACREDITO!!!",function(){
-            
-    
-            });*/
+            $("#usuarios").on("click", ".js-delete", function(){
+                    var button = $(this);
+                    bootbox.confirm("Você tem certeza que quer excluir este usuario?",function(result){
+                        if(result){
+                            $.ajax({
+                                url: "/usuario/delete/" + button.attr("data-id"),
+                                method: "GET",
+                                success: function () {
+                                    window.location.href = "/usuario/"
+                                }
+                            });
+                        }
+                    });
+                });
         });
        </script>
     </body>
