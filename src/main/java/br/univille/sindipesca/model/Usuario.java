@@ -19,6 +19,10 @@ public class Usuario {
     @Temporal(value = TemporalType.DATE)
     private Date dataNascimento;
 
+    public long getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -30,7 +34,9 @@ public class Usuario {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-
+    public void setId(long id) {
+        this.id = id;
+    }
     public void setNome(String nome) {
         this.nome = nome;
     }
