@@ -9,4 +9,6 @@ import br.univille.sindipesca.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> findByNomeContains(String nome);
+    Usuario findByUsuario(String usuario);
+    Usuario findByUsuarioAndSenha(String usuario, String senha);
 }

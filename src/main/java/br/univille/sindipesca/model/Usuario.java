@@ -14,6 +14,8 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String usuario;
+    private String senha;
     private String nome;
     private String sexo;
     @Temporal(value = TemporalType.DATE)
@@ -21,6 +23,22 @@ public class Usuario {
 
     public long getId() {
         return id;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getNome() {
