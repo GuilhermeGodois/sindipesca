@@ -17,8 +17,8 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, length = 11)
-    private long cpf;
+    @Column(nullable = true)
+    private String cpf;
     @Column(nullable = false, length = 50)
     private String nome;
     private Date data;
@@ -40,11 +40,11 @@ public class Cliente {
         this.usuario = usuario;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCp(long cpf) {
+    public void setCp(String cpf) {
         this.cpf = cpf;
     }
 
