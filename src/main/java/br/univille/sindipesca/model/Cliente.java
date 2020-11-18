@@ -21,6 +21,8 @@ public class Cliente {
     private String cpf;
     @Column(nullable = false, length = 50)
     private String nome;
+    @Column(nullable = false, length = 10)
+    private String sexo;
     private Date data;
     @Temporal(value = TemporalType.DATE)
     private Date dataNascimento;
@@ -82,5 +84,13 @@ public class Cliente {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String nome) {
+        this.sexo = sexo;
     }
 }

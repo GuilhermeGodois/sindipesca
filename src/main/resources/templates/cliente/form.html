@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+    
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu">(menu)</nav>
+            <h1>Cliente</h1>
+            <div class="border border-dark">
+                <form th:action="@{/cliente/(form)}" th:object="${cliente}" method="post">
+
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="form-group">
+                        <lable>Nome</lable>
+                        <input type="text" th:field="*{nome}" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <lable>Sexo</lable>
+                        <input type="text" th:field="*{sexo}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <lable>Data de Nascimento</lable>
+                        <input type="date" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+
+       <div th:include="layout :: footer" id="footer">(footer)</div>
+    </body>
+</html>

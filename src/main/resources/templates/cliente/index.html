@@ -9,16 +9,18 @@
             <nav th:replace="layout :: menu">(menu)</nav>
             <h1>Clientes</h1>
 
-            <a th:href="@{/cliente/novo}"></a>
+            <p><a th:href="@{/cliente/novo}"class="btn btn-primary btn-lg">Novo</a></p>
 
             <table class="table">
                 <thead>
                     <th>Nome</th>
+                    <th>Sexo</th>
                     <th>Data de nascimento</th>
                 </thead>
                 <tbody>
                     <tr th:each="umcliente : ${listaclientes}">
                         <td th:text="${umcliente.nome}"></td>
+                        <td th:text="${umcliente.sexo}"></td>
                         <td th:text="${umcliente.dataNascimento}"></td>
                     </tr>
                 </tbody>
