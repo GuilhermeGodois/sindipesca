@@ -3,7 +3,7 @@ package br.univille.sindipesca.model;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,16 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.type.TrueFalseType;
+
 @Entity
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = true)
     private String cpf;
-    @Column(nullable = false, length = 50)
     private String nome;
-    @Column(nullable = false, length = 10)
     private String sexo;
     private Date data;
     @Temporal(value = TemporalType.DATE)
@@ -90,7 +89,7 @@ public class Cliente {
         return sexo;
     }
 
-    public void setSexo(String nome) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 }

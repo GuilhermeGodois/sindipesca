@@ -37,6 +37,7 @@ public class UsuarioController {
         service.save(usuario);
         return new ModelAndView("redirect:/usuario");
     }
+    
     @GetMapping(value="/alterar/{id}")
     public ModelAndView edit(@PathVariable("id") Usuario usuario){
         return new ModelAndView("usuario/form","usuario",usuario);

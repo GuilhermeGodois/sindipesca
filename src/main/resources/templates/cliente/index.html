@@ -11,23 +11,46 @@
 
             <p><a th:href="@{/cliente/novo}"class="btn btn-primary btn-lg">Novo</a></p>
 
-            <table class="table">
-                <thead>
-                    <th>Nome</th>
-                    <th>Sexo</th>
-                    <th>Data de nascimento</th>
+            <table class="table" id="clientes">
+                <thead class="thead-light">
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Data de nascimento</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <tr th:each="umcliente : ${listaclientes}">
                         <td th:text="${umcliente.nome}"></td>
                         <td th:text="${umcliente.sexo}"></td>
                         <td th:text="${umcliente.dataNascimento}"></td>
+                        <td>
+                            <a th:href="@{'/cliente/alterar/' + ${umcliente.id}}" class="btn btn-primary">Alterar</a>
+                            <button class='btn btn-danger js-delete'
+                                th:data-id="${umcliente.id}"><span class="oi oi-bug"></span>Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-
        <div th:include="layout :: footer" id="footer">(footer)</div>
+       <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("#clientes").on("click", ".js-delete", function(){
+                    var button = $(this);
+                    bootbox.confirm("Você tem certeza que quer excluir este cliente?",function(result){
+                        if(result){
+                            $.ajax({
+                                url: "/cliente/delete/" + button.attr("data-id"),
+                                method: "GET",
+                                success: function () {
+                                    window.location.href = "/cliente/"
+                                }
+                            });
+                        }
+                    });
+                });
+        });
+       </script>
     </body>
 </html>
