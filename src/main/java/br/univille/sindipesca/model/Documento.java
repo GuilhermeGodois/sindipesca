@@ -1,36 +1,37 @@
 package br.univille.sindipesca.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Documento {
     @Id
-    private long id;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int paginas;
-    @Column(nullable = false, length = 50)
-    private String nome;
+    private long id;
+    @Temporal(value = TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date data;
-    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
-    private Cliente cliente;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ItensDocumento> itens = new ArrayList<ItensDocumento>();
 
     public long getId() {
         return id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Date getData() {
@@ -41,15 +42,11 @@ public class Documento {
         this.data = data;
     }
 
-    public int getPaginas() {
-        return paginas;
+    public List<ItensDocumento> getItens() {
+        return itens;
     }
 
-    public void setPaginas(int paginas) {
-        this.paginas = paginas;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setItens(List<ItensDocumento> itens) {
+        this.itens = itens;
     }
 }
