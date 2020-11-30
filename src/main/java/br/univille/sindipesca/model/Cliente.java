@@ -1,6 +1,8 @@
 package br.univille.sindipesca.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 
@@ -9,10 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.type.TrueFalseType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Cliente {
@@ -22,10 +26,16 @@ public class Cliente {
     private String cpf;
     private String nome;
     private String sexo;
+    @Temporal(value = TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date data;
     @Temporal(value = TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dataNascimento;
     private String endereço;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ItensDocumento> itens = new ArrayList<ItensDocumento>();
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     private Usuario usuario;
 
@@ -87,6 +97,14 @@ public class Cliente {
 
     public String getSexo() {
         return sexo;
+    }
+    
+    public List<ItensDocumento> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItensDocumento> itens) {
+        this.itens = itens;
     }
 
     public void setSexo(String sexo) {

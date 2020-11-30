@@ -16,6 +16,9 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Data de nascimento</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Número Arquivos</th>
                     <th></th>
                 </thead>
                 <tbody>
@@ -23,7 +26,11 @@
                         <td th:text="${umcliente.nome}"></td>
                         <td th:text="${umcliente.sexo}"></td>
                         <td th:text="${umcliente.dataNascimento}"></td>
+                        <td th:text="${umcliente.id}"></td>
+                        <td th:text="${umcliente.data}"></td>
+                        <td th:text="${umcliente.itens.size()}"></td>
                         <td>
+                            <a th:href="@{'/cliente/detalhar/' + ${umcliente.id}}" class="btn btn-warning">Detalhar</a>
                             <a th:href="@{'/cliente/alterar/' + ${umcliente.id}}" class="btn btn-primary">Alterar</a>
                             <button class='btn btn-danger js-delete'
                                 th:data-id="${umcliente.id}"><span class="oi oi-bug"></span>Excluir</button>
