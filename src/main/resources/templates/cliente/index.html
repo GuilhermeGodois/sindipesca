@@ -5,17 +5,23 @@
     <head th:include="layout :: htmlhead"></head>
     
     <body>
-        <div class="container">
+        <div >
             <nav th:replace="layout :: menu">(menu)</nav>
             <h1>Clientes</h1>
-
-            <p><a th:href="@{/cliente/novo}"class="btn btn-primary btn-lg">Novo</a></p>
-
+            
+            <p><a th:href="@{/cliente/novo}"class="btn btn-primary btn-lg">Novo</a></p> 
+            </br>   
+            <form action="/cliente/pesquisarpessoa" method="post">
+                <input name="nomepesquisa" placeholder="Nome...">
+                <input type="submit" value="Buscar">
+            </form>
             <table class="table" id="clientes">
                 <thead class="thead-light">
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Data de nascimento</th>
+                    <th scope="col">cpf</th>
+                    <th scope="col">endereco</th>
                     <th scope="col">Id</th>
                     <th scope="col">Data</th>
                     <th scope="col">Número Arquivos</th>
@@ -26,6 +32,8 @@
                         <td th:text="${umcliente.nome}"></td>
                         <td th:text="${umcliente.sexo}"></td>
                         <td th:text="${umcliente.dataNascimento}"></td>
+                        <td th:text="${umcliente.numerocpf}"></td>
+                        <td th:text="${umcliente.endereco}"></td>
                         <td th:text="${umcliente.id}"></td>
                         <td th:text="${umcliente.data}"></td>
                         <td th:text="${umcliente.itens.size()}"></td>

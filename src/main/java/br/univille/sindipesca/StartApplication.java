@@ -19,8 +19,8 @@ public class StartApplication implements ApplicationRunner{
         if(usuarioAdmin == null){
             //System.out.println("Nao achou");
             usuarioAdmin = new Usuario();
-            usuarioAdmin.setUsuario("admin");
-            usuarioAdmin.setSenha("admin");
+            usuarioAdmin.setUsuario("Guilherme");
+            usuarioAdmin.setSenha("12345");
             service.save(usuarioAdmin);
             System.out.println("Salva senha " + usuarioAdmin.getSenha());
         }

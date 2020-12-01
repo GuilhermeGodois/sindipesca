@@ -17,10 +17,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +31,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.sindipesca.model.Cliente;
 import br.univille.sindipesca.model.ItensDocumento;
+import br.univille.sindipesca.repository.ClienteRepository;
 import br.univille.sindipesca.service.ClienteService;
+import br.univille.sindipesca.service.impl.ClienteServiceImpl;
 
 @Controller
 @RequestMapping({"/cliente"})
@@ -61,6 +65,13 @@ public class ClienteController {
         return new ModelAndView("cliente/form",dados);
     }
 
+    @PostMapping("/pesquisarpessoa")
+    public ModelAndView pesquisar( @RequestParam("nomepesquisa") String nomepesquisa){
+        System.out.println(nomepesquisa);
+        List<Cliente> lista = service.findByNomeContains(nomepesquisa);
+        
+        return new ModelAndView("cliente/index","listaclientes",lista);
+    }
 
 
     @GetMapping(value="/delete/{id}")
@@ -68,6 +79,7 @@ public class ClienteController {
         service.delete(cliente);
         return new ModelAndView("redirect:/cliente");
     }
+   
 
     @GetMapping(value="/delete/{id}/deleteitem/{iditem}")
     public ModelAndView delete(@PathVariable("id") Cliente cliente, @PathVariable("iditem") ItensDocumento item){
@@ -76,10 +88,9 @@ public class ClienteController {
     }
 
     @PostMapping(params={"form"})
-    public ModelAndView save(Cliente cliente, @RequestParam("files") MultipartFile[] files){
-
+    public ModelAndView save(@ModelAttribute Cliente cliente, @RequestParam("files") MultipartFile[] files){
+        service.save(cliente);
         service.uploadFiles(cliente, files);
-
         return new ModelAndView("redirect:/cliente");
     }
 

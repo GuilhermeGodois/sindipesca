@@ -23,24 +23,50 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String cpf;
+    private String numerocpf;
     private String nome;
     private String sexo;
+    private String telefone;
+    private String endereco;
     @Temporal(value = TemporalType.DATE)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data;
     @Temporal(value = TemporalType.DATE)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
     private String endereço;
-    
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItensDocumento> itens = new ArrayList<ItensDocumento>();
-    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE })
     private Usuario usuario;
 
     public long getId() {
         return id;
+    }
+
+    public String getNumerocpf() {
+        return numerocpf;
+    }
+
+    public void setNumerocpf(String numerocpf) {
+        this.numerocpf = numerocpf;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public Usuario getUsuario() {
@@ -51,13 +77,7 @@ public class Cliente {
         this.usuario = usuario;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
 
-    public void setCp(String cpf) {
-        this.cpf = cpf;
-    }
 
     public String getEndereço() {
         return endereço;
@@ -110,4 +130,8 @@ public class Cliente {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+	public static List<Cliente> findByNomeContains(String nome2) {
+		return null;
+	}
 }

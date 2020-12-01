@@ -93,7 +93,7 @@ public class ClienteServiceImpl implements ClienteService {
     
 
 
-@Override
+    @Override
     public InputStreamResource downloadFile(ItensDocumento item) throws FileNotFoundException {
         createFileFolder();
         File file = new File(item.getCaminho());
@@ -122,6 +122,12 @@ public class ClienteServiceImpl implements ClienteService {
         }catch(Exception e){
 
         }
+    }
+
+    @Override
+    public List<Cliente> findByNomeContains(String nome) {
+        // TODO Auto-generated method stub
+        return repository.findByNomeContainingIgnoreCase(nome);
     }
 
 }
